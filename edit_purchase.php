@@ -3,10 +3,14 @@
   require_once('includes/load.php');
   // Checkin What level user has permission to view this page
    page_require_level(3);
+
 ?>
 <?php
 $purchase = find_by_id('purchase',(int)$_GET['id']);
-if(!$sale){
+var_dump($purchase);
+// die();
+
+if(!$purchase){
   $session->msg("d","Missing product id.");
   redirect('purchase.php');
 }
@@ -15,9 +19,6 @@ if(!$sale){
 <?php
 
   if(isset($_POST['update_sale'])){
-
-
-
 
     $req_fields = array('title','quantity','price','total', 'date' );
     validate_fields($req_fields);
@@ -87,7 +88,7 @@ if(!$sale){
                   <input type="text" class="form-control" name="quantity" value="<?php echo (int)$purchase['qty']; ?>">
                 </td>
                 <td id="s_price">
-                  <input type="text" class="form-control" name="price" value="<?php echo remove_junk($product['purchase_price']); ?>" >
+                  <input type="text" class="form-control" name="price" value="<?php echo remove_junk($purchase['purchase_price']); ?>" >
                 </td>
                 <td>
                   <input type="text" class="form-control" name="total" value="<?php echo remove_junk($purchase['price']); ?>">
